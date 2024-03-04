@@ -1,0 +1,110 @@
+.register {
+  display: block;
+  background: rgb(16, 20, 30);
+  height: 100%;
+}
+
+.registerPage {
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  height: 962px;
+  align-items: center;
+  padding-top: 79px;
+}
+
+.headerLogo img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 83px;
+}
+
+.regHeroMenu {
+  padding: 32px;
+  border-radius: 20px;
+  background-color: rgb(22, 29, 47);
+  height: auto;
+}
+
+.regHeroMenu h2 {
+  color: #fff;
+  margin-bottom: 42px;
+}
+
+.regInps {
+  display: block;
+  margin-bottom: 30px;
+  gap: 25px;
+}
+
+.regInps input {
+  padding: 10px;
+  transition: all 0.7s ease;
+  color: #fff;
+  border: none;
+  outline: none;
+  background-color: rgb(22, 29, 47);
+  border-bottom: 1px solid rgb(90, 105, 143);
+  padding-bottom: 18px;
+  width: 100%;
+}
+
+.regInps input:hover {
+  border-bottom: 1px solid #fff;
+}
+
+.registerAccBtn {
+  width: 100%;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  color: #fff;
+  background: rgb(252, 71, 71);
+  padding: 15px 97px;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center;
+  white-space-collapse: collapse;
+  margin-bottom: 24px;
+  transition: all 0.7s ease;
+}
+
+.registerAccBtn:hover {
+  color: rgb(22, 29, 47);
+  background: #fff;
+}
+
+.regInps input::placeholder {
+  color: #fff;
+  background-color: rgb(22, 29, 47);
+  opacity: 0.5;
+}
+
+.noAcc {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.input-error {
+  border: 1px solid red;
+}
+
+.error {
+  border-top: red;
+  color: red;
+}
+
+.accNo {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.loginBtn {
+  text-decoration: none;
+  color: rgb(252, 71, 71);
+}

@@ -1,0 +1,109 @@
+body {
+  background: rgb(16, 20, 30);
+}
+
+.home {
+  display: flex;
+  max-width: 1600px;
+  width: 100%;
+  margin-top: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+}
+
+.homeMenu {
+  display: block;
+  margin-right: 36px;
+  background: rgb(22, 29, 47);
+  padding: 36px 32px;
+  border-radius: 20px;
+  align-items: center;
+  height: 10%;
+}
+
+.homeMovies {
+  margin-bottom: 75px;
+}
+
+.homeBar {
+  display: grid;
+  align-items: center;
+  row-gap: 40px;
+  margin-bottom: 552px;
+}
+
+.homeSearch {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 34px;
+}
+
+.homeSearch input {
+  color: #fff;
+  background: transparent;
+  outline: none;
+  border: none;
+}
+
+.homeSearch input::placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+.homeSearch svg {
+  color: #fff;
+}
+
+.homeFilms h3 {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 40px;
+  margin-top: 40px;
+  margin-bottom: 32px;
+}
+
+.filmCards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  justify-content: center;
+}
+
+.filmCards div {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px 32px;
+  background: rgb(16, 20, 30);
+}
+
+.homeCarousel h3 {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 40px;
+  letter-spacing: -0.5px;
+  margin-left: 15px;
+  margin-bottom: 25px;
+}
+
+.searchInput {
+  width: 500px;
+}
+
+.searchBtn {
+  padding: 10px 15px;
+  color: #fff;
+  background: rgb(22, 29, 47);
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  opacity: 0.5;
+}
+
+.searchBtn:hover {
+  color: rgb(22, 29, 47);
+  color: #fff;
+}

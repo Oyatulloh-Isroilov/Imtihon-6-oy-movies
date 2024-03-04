@@ -1,0 +1,59 @@
+.css-bhp9pd-MuiPaper-root-MuiCard-root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bookmark1 {
+  position: absolute;
+  top: 16px;
+  left: 290px;
+  width: 32px;
+  height: 32px;
+  z-index: 100000;
+}
+
+.cardItem {
+  width: 100%;
+}
+
+.filmName {
+  width: 100%;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 23px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.css-bhp9pd-MuiPaper-root-MuiCard-root {
+  background: rgb(16, 20, 30);
+  width: 380px;
+  height: 386px;
+}
+
+.cardContent {
+  color: #fff;
+}
+
+.MuiTypography-body1 {
+  display: flex;
+  white-space-collapse: collapse;
+}
+
+.searchBtn {
+  padding: 10px 15px;
+  color: #fff;
+  background: rgb(22, 29, 47);
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  opacity: 0.5;
+}
+
+.searchBtn:hover {
+  color: rgb(22, 29, 47);
+  color: #fff;
+}

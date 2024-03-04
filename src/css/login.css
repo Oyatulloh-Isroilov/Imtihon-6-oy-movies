@@ -1,0 +1,94 @@
+.login {
+  padding-top: 1px;
+  padding-bottom: 331px;
+  background: rgb(16, 20, 30);
+}
+
+.loginPage {
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  align-items: center;
+  padding-top: 79px;
+  margin-top: 50px;
+}
+
+.headerLogo img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.logHeroMenu {
+  padding: 32px;
+  border-radius: 20px;
+  background-color: rgb(22, 29, 47);
+  align-items: center;
+}
+
+.logHeroMenu h2 {
+  color: #fff;
+  margin-bottom: 42px;
+}
+
+.logInps {
+  display: block;
+  margin-bottom: 30px;
+  gap: 25px;
+}
+
+.logInps input {
+  padding: 10px;
+  transition: all 0.7s ease;
+  color: #fff;
+  border: none;
+  outline: none;
+  background-color: rgb(22, 29, 47);
+  border-bottom: 1px solid rgb(90, 105, 143);
+  padding-bottom: 18px;
+  width: 100%;
+}
+
+.logInps input:hover {
+  border-bottom: 1px solid #fff;
+}
+
+.loginAccBtn {
+  width: 100%;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  color: #fff;
+  background: rgb(252, 71, 71);
+  padding: 15px 97px;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center;
+  white-space-collapse: collapse;
+  margin-bottom: 24px;
+  transition: all 0.7s ease;
+}
+
+.loginAccBtn:hover {
+  color: rgb(22, 29, 47);
+  background: #fff;
+}
+
+.logInps input::placeholder {
+  color: #fff;
+  background-color: rgb(22, 29, 47);
+  opacity: 0.5;
+}
+
+.noAcc {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.noAcc a {
+  color: rgb(252, 71, 71);
+  text-decoration: none;
+}
