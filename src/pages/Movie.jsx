@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import '../css/home.css'
 import MovieCard from '../Cards/MovieCard';
+import CustomLoader from '../components/CustomLoader';
 
 function Movie() {
     const [cardIds, setCardIds] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const generateGUID = () => {
@@ -38,13 +40,15 @@ function Movie() {
 
     const searchMovies = async () => {
         try {
-          const response = await fetch(`https://api.kinopoisk.dev/v1.4/movie/search?query=${searchQuery}`);
-          const data = await response.json();
-          console.log(data);
+            setLoading(true);
+            const response = await fetch(`https://api.kinopoisk.dev/v1.4/movie/search?query=${searchQuery}`);
+            const data = await response.json();
+            setLoading(false);
         } catch (error) {
-          console.error('Error fetching movies:', error);
+            console.error('Error fetching movies:', error);
+            setLoading(false);
         }
-      };
+    };
 
     return (
         <div className="home">
@@ -65,15 +69,19 @@ function Movie() {
             <div className="homeHero">
                 <div className="homeSearch">
                     <SearchIcon className="searchIcon" />
-                    <input className='searchInput' type="text" placeholder="Search for movies or TV series" />
+                    <input className='searchInput' type="text" placeholder="Search for movies or TV series" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
                     <button onClick={searchMovies} className='searchBtn'>Search</button>
                 </div>
                 <div className="homeFilms">
                     <h3>Movies</h3>
                     <div className="filmCards">
-                        {cardIds.map((id) => (
-                            <MovieCard key={id} id={id} />
-                        ))}
+                        {loading ? (
+                            <CustomLoader />
+                        ) : (
+                            cardIds.map((id) => (
+                                <MovieCard key={id} id={id} />
+                            ))
+                        )}
                     </div>
                 </div>
             </div>

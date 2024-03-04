@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import '../css/tvSeriesCard.css'
 
-function TvSeriesCard({ id }) {
+function TvSeriesCard() {
     const [tvSeriesBookmarks, setTvSeriesBookmarks] = useState({});
     const [tvSeries, setTvSeries] = useState([]);
 
@@ -21,7 +21,6 @@ function TvSeriesCard({ id }) {
             .then(data => {
                 if (data && data.docs && data.docs.length > 0) {
                     setTvSeries(data.docs);
-                    console.log(data);
                 }
             })
             .catch(error => {
@@ -34,8 +33,8 @@ function TvSeriesCard({ id }) {
         setTvSeriesBookmarks(storedBookmarks);
     }, []);
 
-    const handleBookmarkClick = (movieId) => {
-        const newBookmarks = { ...tvSeriesBookmarks, [movieId]: !tvSeriesBookmarks[movieId] };
+    const handleBookmarkClick = (tvSeriesId) => {
+        const newBookmarks = { ...tvSeriesBookmarks, [tvSeriesId]: !tvSeriesBookmarks[tvSeriesId] };
         localStorage.setItem('bookmarks', JSON.stringify(newBookmarks));
         setTvSeriesBookmarks(newBookmarks);
     };
@@ -43,22 +42,20 @@ function TvSeriesCard({ id }) {
     return (
         <div className='CARD'>
             {tvSeries.map(tvSeries => (
-                <Card key={tvSeries.id} style={{ width: 345, height: 500 }} className='cardItem'>
+                <Card key={tvSeries.id} style={{ height: 600, width: 345 }} className='cardItem'>
                     <CardActionArea>
                         <React.Fragment>
-                            <CardMedia className='cardImg' style={{ height: 400, width: 345 }} component="img" image={tvSeries.backdrop.previewUrl} />
+                            <CardMedia className='cardImg' style={{ height: 550, width: 365 }} component="img" image={tvSeries.backdrop.previewUrl} />
                             <CardContent className='cardContent'>
                                 <Typography component="div">
                                     <p className='filmCreate'>{tvSeries.year}</p>
                                     <h2 className='filmName'>{tvSeries.alternativeName}</h2>
                                 </Typography>
                             </CardContent>
-                            {/* Aktiv xususiyatlarni tekshiring va ularni qo'shing */}
                             <img onClick={() => handleBookmarkClick(tvSeries.id)} className={`bookmark1 ${tvSeriesBookmarks[tvSeries.id] ? 'active' : ''}`} src={tvSeriesBookmarks[tvSeries.id] ? "./bookmarkActive.svg" : "./bookmark.svg"} alt="Bookmark" />
                         </React.Fragment>
                     </CardActionArea>
                 </Card>
-
             ))}
         </div>
     );

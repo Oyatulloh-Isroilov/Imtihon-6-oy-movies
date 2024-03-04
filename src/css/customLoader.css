@@ -1,0 +1,19 @@
+.loader {
+  position: absolute;
+  justify-content: center;
+  border: 8px solid rgba(0, 0, 0, 0.1); /* Loaderning qo'shimcha qatorlari */
+  border-top: 8px solid #3498db; /* Loaderning yorqin qismi */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 3s linear infinite; /* Animatsiya davom etish muddati 2 sekunda */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -4,11 +4,13 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import '../css/movieCard.css'
+import CustomLoader from '../components/CustomLoader';
+import '../css/movieCard.css';
 
 function MovieCard({ id }) {
     const [movieBookmarks, setMovieBookmarks] = useState({});
     const [movies, setMovies] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch("https://api.kinopoisk.dev/v1.4/movie?lists=top250", {
@@ -21,10 +23,12 @@ function MovieCard({ id }) {
             .then(data => {
                 if (data && data.docs && data.docs.length > 0) {
                     setMovies(data.docs);
+                    setLoading(false);
                 }
             })
             .catch(error => {
                 console.error('Error fetching movies:', error);
+                setLoading(false);
             });
     }, []);
 
@@ -41,12 +45,13 @@ function MovieCard({ id }) {
 
     return (
         <div className='CARD'>
-            {movies.map(movie => (
-                <Card key={movie.id} style={{ width: 345 }} className='cardItem'>
-                    <CardActionArea>
-                        <React.Fragment>
-                            <CardMedia className='cardImg' style={{ height: 450, width: 345 }} component="img" image={movie.poster.url} />
-
+            {loading ? (
+                <CustomLoader />
+            ) : (
+                movies.map(movie => (
+                    <Card key={movie.id} style={{ height: 600, width: 345 }} className='cardItem'>
+                        <CardActionArea>
+                            <CardMedia className='cardImg' style={{ height: 450, width: 365 }} component="img" image={movie.poster.url} />
                             <img
                                 onClick={() => handleBookmarkClick(movie.id)}
                                 className={`bookmark1 ${movieBookmarks[movie.id] ? 'active' : ''}`}
@@ -59,10 +64,10 @@ function MovieCard({ id }) {
                                     <h2 className='filmName'>{movie.name}</h2>
                                 </Typography>
                             </CardContent>
-                        </React.Fragment>
-                    </CardActionArea>
-                </Card>
-            ))}
+                        </CardActionArea>
+                    </Card>
+                ))
+            )}
         </div>
     );
 }

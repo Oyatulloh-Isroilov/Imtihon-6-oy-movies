@@ -6,14 +6,11 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import '../css/bookmarkCard.css';
 
-function BookmarkCard({ id }) {
-    const [bookmarks, setFilmsBookmarks] = useState({});
+function BookmarkCard() {
     const [bookmarkss, setBookmarkss] = useState([]);
 
     useEffect(() => {
         const storedBookmarks = JSON.parse(localStorage.getItem('bookmarks')) || {};
-        setFilmsBookmarks(storedBookmarks);
-
         const bookmarksArray = Object.keys(storedBookmarks)
             .filter(key => storedBookmarks[key] === true)
             .map(key => storedBookmarks[key]);
@@ -24,7 +21,7 @@ function BookmarkCard({ id }) {
     return (
         <div className='CARD'>
             {bookmarkss.map((bookmark, index) => (
-                <Card key={index} style={{ width: 345, height: 500 }} className='cardItem'>
+                <Card key={index} style={{ height: 600, width: 345 }} className='cardItem'>
                     <CardActionArea>
                         <React.Fragment>
                             <CardMedia

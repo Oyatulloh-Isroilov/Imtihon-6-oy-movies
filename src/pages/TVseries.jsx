@@ -1,24 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
-import '../css/tvSeries.css'
-import '../css/tvSeriesCard.css'
-import TvSeriesCard from '../Cards/TvSeriesCard'
+import '../css/tvSeries.css';
+import '../css/tvSeriesCard.css';
+import TvSeriesCard from '../Cards/TvSeriesCard';
+import CustomLoader from '../components/CustomLoader';
 
 function TVSeries() {
     const [cardIds, setCardIds] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const generateGUID = () => {
-            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-                let r = (Math.random() * 16) | 0,
-                    v = c === 'x' ? r : (r & 0x3) | 0x8;
-                return v.toString(16);
-            });
+        const fetchData = async () => {
+            try {
+                const generateGUID = () => {
+                    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                        let r = (Math.random() * 16) | 0,
+                            v = c === 'x' ? r : (r & 0x3) | 0x8;
+                        return v.toString(16);
+                    });
+                };
+
+                const ids = Array.from({ length: 1 }, () => generateGUID());
+                setCardIds(ids);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                setLoading(false);
+            }
         };
 
-        const ids = Array.from({ length: 1 }, () => generateGUID());
-        setCardIds(ids);
+        fetchData();
     }, []);
 
     const handleAllFilmsClick = () => {
@@ -39,14 +51,15 @@ function TVSeries() {
 
     const searchMovies = async () => {
         try {
-          const response = await fetch(`https://api.kinopoisk.dev/v1.4/movie/search?query=${searchQuery}`);
-          const data = await response.json();
-          console.log(data);
+            setLoading(true);
+            const response = await fetch(`https://api.kinopoisk.dev/v1.4/movie/search?query=${searchQuery}`);
+            const data = await response.json();
+            setLoading(false);
         } catch (error) {
-          console.error('Error fetching movies:', error);
+            console.error('Error fetching movies:', error);
+            setLoading(false);
         }
-      };
-
+    };
     return (
         <div className="home">
             <div className="homeMenu">
@@ -66,15 +79,25 @@ function TVSeries() {
             <div className="homeHero">
                 <div className="homeSearch">
                     <SearchIcon className="searchIcon" />
-                    <input className='searchInput' type="text" placeholder="Search for movies or TV series" />
+                    <input
+                        className='searchInput'
+                        type="text"
+                        placeholder="Search for movies or TV series"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
                     <button onClick={searchMovies} className='searchBtn'>Search</button>
                 </div>
                 <div className="homeFilms">
                     <h3>TV Series</h3>
                     <div className="filmCards">
-                        {cardIds.map((id) => (
-                            <TvSeriesCard key={id} id={id} />
-                        ))}
+                        {loading ? (
+                            <CustomLoader />
+                        ) : (
+                            cardIds.map((id) => (
+                                <TvSeriesCard key={id} id={id} />
+                            ))
+                        )}
                     </div>
                 </div>
             </div>

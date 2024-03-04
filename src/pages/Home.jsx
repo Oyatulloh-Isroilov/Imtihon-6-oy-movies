@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
-import '../css/home.css'
+import '../css/home.css';
 import { useNavigate } from 'react-router-dom';
 import FilmsCard from '../Cards/FilmsCard';
+import CustomLoader from '../components/CustomLoader';
 
 function Home() {
   const [cardIds, setCardIds] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,6 +22,7 @@ function Home() {
 
     const ids = Array.from({ length: 1 }, () => generateGUID());
     setCardIds(ids);
+    setLoading(false);
   }, []);
 
   const handleAllFilmsClick = () => {
@@ -35,15 +38,34 @@ function Home() {
   };
 
   const handleBookmarkFilmsClick = () => {
-    window.location.href = "/bookmarks";
+    navigate("/bookmarks");
   };
 
   useEffect(() => {
-    const storedToken = JSON.parse(localStorage.getItem('token'));
-    if (storedToken && storedToken.email) {
-      navigate('/');
-    }
-  }, [navigate]);
+    const generateGUID = () => {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        let r = (Math.random() * 16) | 0,
+          v = c === 'x' ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      });
+    };
+
+    setLoading(true);
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`API_URL`);
+        const data = await response.json();
+        setCardIds(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
@@ -55,16 +77,17 @@ function Home() {
         console.error('Search query is empty');
         return;
       }
-  
+
       const response = await fetch(`https://api.kinopoisk.dev/v1.4/movie/search?query=${searchQuery}`);
       const data = await response.json();
-      console.log(data);
     } catch (error) {
       console.error('Error fetching movies:', error);
     }
   };
-  
 
+  const handleCardClick = (cardId) => {
+    navigate(`/film/${cardId}`);
+  };
 
   return (
     <div className="home">
@@ -97,9 +120,13 @@ function Home() {
         <div className="homeFilms">
           <h3>Recommended for you</h3>
           <div className="filmCards">
-            {cardIds.map((id) => (
-              <FilmsCard key={id} id={id} />
-            ))}
+            {loading ? (
+              <CustomLoader />
+            ) : (
+              cardIds.map((id) => (
+                <FilmsCard key={id} id={id} onClick={() => handleCardClick(id)} />
+              ))
+            )}
           </div>
         </div>
       </div>

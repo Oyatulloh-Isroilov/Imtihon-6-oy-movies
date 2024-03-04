@@ -40,7 +40,6 @@ function Bookmark() {
         try {
             const response = await fetch(`https://api.kinopoisk.dev/v1.4/movie/search?query=${searchQuery}`);
             const data = await response.json();
-            console.log(data);
         } catch (error) {
             console.error('Error fetching movies:', error);
         }

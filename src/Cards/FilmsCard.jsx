@@ -1,10 +1,11 @@
+// FilmsCard.js
 import React, { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import '../css/card.css'
+import '../css/card.css';
 
 function FilmsCard({ id }) {
     const [filmsBookmarks, setFilmsBookmarks] = useState({});
@@ -33,30 +34,34 @@ function FilmsCard({ id }) {
         setFilmsBookmarks(storedBookmarks);
     }, []);
 
-    const handleBookmarkClick = (filmsId) => {
-        const newBookmarks = { ...filmsBookmarks, [filmsId]: !filmsBookmarks[filmsId] };
+    const handleBookmarkClick = (filmId) => {
+        const newBookmarks = { ...filmsBookmarks, [filmId]: !filmsBookmarks[filmId] };
         localStorage.setItem('bookmarks', JSON.stringify(newBookmarks));
         setFilmsBookmarks(newBookmarks);
     };
 
     return (
         <div className='CARD'>
-            {films.map(films => (
-                <Card key={films.id} style={{ width: 345, height: 500 }} className='cardItem'>
+            {films.map(film => (
+                <Card key={film.id} style={{ height: 600, width: 345 }} className='cardItem'>
                     <CardActionArea>
                         <React.Fragment>
-                            <CardMedia className='cardImg' style={{ height: 400, width: 345 }} component="img" image={films.poster.url} />
-
+                            <CardMedia
+                                className='cardImg'
+                                style={{ height: 550, width: 345 }}
+                                component="img"
+                                image={film.poster.url}
+                            />
                             <img
-                                onClick={() => handleBookmarkClick(films.id)}
-                                className={`bookmark1 ${filmsBookmarks[films.id] ? 'active' : ''}`}
-                                src={filmsBookmarks[films.id] ? "./bookmarkActive.svg" : "bookmark.svg"}
+                                onClick={() => handleBookmarkClick(film.id)}
+                                className={`bookmark1 ${filmsBookmarks[film.id] ? 'active' : ''}`}
+                                src={filmsBookmarks[film.id] ? "./bookmarkActive.svg" : "bookmark.svg"}
                                 alt="Bookmark"
                             />
                             <CardContent className='cardContent'>
                                 <Typography component="div">
-                                    <p className='filmCreate'>{films.year}</p>
-                                    <h2 className='filmName'>{films.name}</h2>
+                                    <p className='filmCreate'>{film.year}</p>
+                                    <h2 className='filmName'>{film.name}</h2>
                                 </Typography>
                             </CardContent>
                         </React.Fragment>
